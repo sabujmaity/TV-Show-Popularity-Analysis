@@ -32,3 +32,34 @@ def webscraping():
     else:
         print("List is empty/account name not found.")
         
+def PlotPieChart(values,Title):
+    fig= plt.figure(figsize=(12,6))
+    labels='Weakly Positive','Positive','Strongly Positive','Neutral','Weakly Negative','Negative','Strongly Negative'
+    color=['tab:blue','tab:orange','tab:purple','tab:cyan','tab:pink','aquamarine','rosybrown']
+    plt.pie(values,labels=labels,colors=color,autopct='%1.2f%%')
+    plt.axis('equal')
+    plt.title(Title)
+    plt.legend()
+    plt.show()
+
+def ReadFile(FileName):
+    list_comments=[]
+    with open(FileName,'r') as f:
+        for line in f.read().split('\n'):
+            list_comments.append(line)
+        f.close()
+    return list_comments
+
+def ReadCsvFile(FileName):
+    Line=[]
+    show_name=[]
+    trp=[]
+    with open('Trpchart.csv','r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for line in csv_reader:
+            Line.append(line)
+        for i in range(1,6):
+            show_name.append(Line[i][1])
+            trp.append(Line[i][2])
+    return trp,show_name
+        
