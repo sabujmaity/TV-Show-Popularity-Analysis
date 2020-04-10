@@ -62,4 +62,29 @@ def ReadCsvFile(FileName):
             show_name.append(Line[i][1])
             trp.append(Line[i][2])
     return trp,show_name
+def SentimentAnalysis(Data):
+    positive = 0
+    wpositive = 0
+    spositive = 0
+    negative = 0
+    wnegative = 0
+    snegative = 0
+    neutral = 0
+    for i in range(0,50):
+        analysis = TextBlob(Data[i])
+        if (analysis.sentiment.polarity >=-0.03 and analysis.sentiment.polarity <= 0.03):  
+            neutral += 1
+        elif (analysis.sentiment.polarity > 0.03 and analysis.sentiment.polarity <= 0.3):
+            wpositive += 1
+        elif (analysis.sentiment.polarity > 0.3 and analysis.sentiment.polarity <= 0.55):
+            positive += 1
+        elif (analysis.sentiment.polarity > 0.55 and analysis.sentiment.polarity <= 1):
+            spositive += 1
+        elif (analysis.sentiment.polarity > -0.3 and analysis.sentiment.polarity <= -0.03):
+            wnegative += 1
+        elif (analysis.sentiment.polarity > -0.55 and analysis.sentiment.polarity <= -0.3):
+            negative += 1
+        elif (analysis.sentiment.polarity > -1 and analysis.sentiment.polarity <= -0.55):
+            snegative += 1
+    return wpositive,positive,spositive,neutral,wnegative,negative,snegative
         
